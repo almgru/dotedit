@@ -3,12 +3,12 @@ local -a args
 
 args=$(dotedit --list)
 
+if [[ ${#args[@]} -gt 0 ]]
+then
+    _alternative "arguments:custom arg:($args)"
+fi
+
 _arguments '-h[display help]' '--help[display help]' \
     '-l[list programs with known paths]' '--list[list programs with known paths]' \
-    '-u[update PROGRAM path and exit] --update[update PROGRAM path and exit]' \
-    '-r[remove PROGRAM path and exit] --remove[remove PROGRAM path and exit]'
-
-if [[ ${args[#]} -gt 0 ]]
-then
-    _alternative "arguments:custom arg:($args))"
-fi
+    '-u[update PROGRAM path and exit]' '--update[update PROGRAM path and exit]' \
+    '-r[remove PROGRAM path and exit]' '--remove[remove PROGRAM path and exit]'
