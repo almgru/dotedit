@@ -2,7 +2,7 @@ import os
 import os.path
 
 
-def best_match(self, program):
+def best_match(program):
     home_path = os.environ.get('HOME')
     default_config_path = home_path + '/.config'
     config_path = os.environ.get('XDG_CONFIG_HOME', default_config_path)
