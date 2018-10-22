@@ -14,3 +14,7 @@ complete --no-files --command dotedit --short-option h --long-option help \
 
 complete --no-files --command dotedit --arguments '(dotedit --list)' \
          --description "program to edit dotfile of"
+
+complete --no-files --command dotedit --long-option completions \
+         --arguments "bash zsh fish" \
+         --description "output completion script for SHELL. (bash, zsh & fish currently supported)"

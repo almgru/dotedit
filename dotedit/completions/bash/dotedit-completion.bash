@@ -1,1 +1,1 @@
-complete -W "-h --help -l --list -r --remove -u --update $(dotedit --list)" dotedit
+complete -W "--completions -h --help -l --list -r --remove -u --update $(dotedit --list)" dotedit

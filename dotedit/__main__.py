@@ -63,7 +63,7 @@ def init_argparse():
     parser.add_argument("-u", "--update", metavar='PROGRAM',
                         help="update PROGRAM path and exit")
     parser.add_argument("--completions", metavar="SHELL",
-                        help=("install completion script for SHELL. " +
+                        help=("output completion script for SHELL. " +
                               "(bash, zsh & fish currently supported)"))
 
     return parser
