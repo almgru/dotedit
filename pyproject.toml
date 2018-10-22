@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dotedit"
-version = "0.4.0"
+version = "1.0.0"
 description = "Edit dotfiles easily"
 authors = [
     "Daniel Alm Grundström <daniel.alm.grundstrom@protonmail.com>"
@@ -14,7 +14,7 @@ keywords = [
     "dotedit",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: End Users/Desktop",
