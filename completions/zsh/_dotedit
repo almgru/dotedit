@@ -1,0 +1,14 @@
+#compdef dotedit
+local -a args
+
+args=$(dotedit --list)
+
+_arguments '-h[display help]' '--help[display help]' \
+    '-l[list programs with known paths]' '--list[list programs with known paths]' \
+    '-u[update an entry and exit] --update[update an entry and exit]' \
+    '-r[remove an entry and exit] --remove[remove an entry and exit]'
+
+if [[ ${args[#]} -gt 0 ]]
+then
+    _alternative "arguments:custom arg:($args))"
+fi
