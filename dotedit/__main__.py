@@ -7,7 +7,7 @@ import readline
 
 from ._path_completer import _PathCompleter
 from ._path_store import _PathStore
-from ._path_matcher import _PathMatcher
+from . import _path_matcher
 
 
 def main():
@@ -21,12 +21,8 @@ def main():
     if args.list:
         for program in store.list():
             print(program)
-
-        return 0
     elif args.remove:
         store.remove(args.remove)
-
-        return 0
     elif args.update:
         try:
             existing = store.get(args.update)
@@ -36,23 +32,21 @@ def main():
         path = read_path("Add path to {0}: ".format(args.update),
                          existing)
         store.update(args.update, path)
-
-        return 0
     elif args.program != "none":
         try:
             path = store.get(args.program)
         except LookupError:
             path = read_path("Add path to {0}: ".format(args.program),
-                             _PathMatcher().best_match(args.program))
+                             _path_matcher.best_match(args.program))
             store.add(args.program, path)
 
         open_editor(path)
-
-        return 0
     else:
         parser.print_usage()
 
-        return -1
+        return 1
+
+    return 0
 
 
 def init_argparse():
@@ -62,10 +56,10 @@ def init_argparse():
                         help="program to edit dotfile of")
     parser.add_argument("-l", "--list", action="store_true",
                         help="list programs with known paths and exit")
-    parser.add_argument("-r", "--remove",
-                        help="remove an entry and exit")
-    parser.add_argument("-u", "--update",
-                        help="update an entry and exit")
+    parser.add_argument("-r", "--remove", metavar='PROGRAM',
+                        help="remove PROGRAM path and exit")
+    parser.add_argument("-u", "--update", metavar='PROGRAM',
+                        help="update PROGRAM path and exit")
 
     return parser
 
