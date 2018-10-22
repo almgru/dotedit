@@ -23,7 +23,7 @@ def main():
     if args.list:
         [print(program) for program in store.list()]
     elif args.completions:
-        install_comp_script(args.completions)
+        print_comp_script(args.completions)
     elif args.remove:
         store.remove(args.remove)
     elif args.update:
@@ -82,17 +82,19 @@ def read_path(prompt, initial_text):
     readline.parse_and_bind("tab: complete")
     readline.parse_and_bind("set match-hidden-files on")
     readline.set_completer(_PathCompleter().complete)
+
     try:
         path = input(prompt)
     except (EOFError, KeyboardInterrupt) as e:
         sys.exit(1)
+
     readline.set_pre_input_hook()
     readline.set_completer()
 
     return path
 
 
-def install_comp_script(shell):
+def print_comp_script(shell):
     home = os.environ.get('HOME')
     config_home = os.environ.get('XDG_CONFIG_HOME')
     res_name = "completions/"

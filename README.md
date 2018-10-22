@@ -58,7 +58,7 @@ $ dotedit --remove xinit
 ## Install
 
 ```bash
-$ pip install --user dotedit
+$ pip3 install --user dotedit
 ```
 
 ### Completions
