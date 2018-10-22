@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "dotedit"
 version = "0.3.0"
-description = "Edit your dotfiles easily"
+description = "Edit dotfiles easily"
 authors = [
     "Daniel Alm Grundström <daniel.alm.grundstrom@protonmail.com>"
 ]
@@ -22,6 +22,7 @@ classifiers = [
     "Topic :: System :: Systems Administration",
     "Topic :: Utilities"
 ]
+include = ["dotedit/completions/**/*"]
 
 [tool.poetry.dependencies]
 python = "3"

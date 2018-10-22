@@ -2,8 +2,11 @@ import sys
 import os
 import os.path
 import argparse
-import subprocess
 import readline
+
+from pkg_resources import resource_stream
+from subprocess import call
+from shutil import copy
 
 from ._path_completer import _PathCompleter
 from ._path_store import _PathStore
@@ -15,11 +18,12 @@ def main():
     args = parser.parse_args()
     data_path = (os.environ.get('XDG_DATA_HOME',
                  os.environ.get('HOME') + '/.local/share') + '/dotedit')
-
     store = _PathStore(data_path)
 
     if args.list:
         [print(program) for program in store.list()]
+    elif args.completions:
+        install_comp_script(args.completions)
     elif args.remove:
         store.remove(args.remove)
     elif args.update:
@@ -58,12 +62,15 @@ def init_argparse():
                         help="remove PROGRAM path and exit")
     parser.add_argument("-u", "--update", metavar='PROGRAM',
                         help="update PROGRAM path and exit")
+    parser.add_argument("--completions", metavar="SHELL",
+                        help=("install completion script for SHELL. " +
+                              "(bash, zsh & fish currently supported)"))
 
     return parser
 
 
 def open_editor(path):
-    subprocess.call([os.environ.get("EDITOR", "nano"), path])
+    call([os.environ.get("EDITOR", "nano"), path])
 
 
 def read_path(prompt, initial_text):
@@ -85,12 +92,21 @@ def read_path(prompt, initial_text):
     return path
 
 
-def create_dotfile_dirs(path):
-    try:
-        os.makedirs(os.path.dirname(path))
-    except OSError as e:
-        if e.errno != os.errno.EEXIST:
-            raise
+def install_comp_script(shell):
+    home = os.environ.get('HOME')
+    config_home = os.environ.get('XDG_CONFIG_HOME')
+    res_name = "completions/"
+
+    if shell == 'bash':
+        res_name += "bash/dotedit-completion.bash"
+    elif shell == 'zsh':
+        res_name += "zsh/_dotedit"
+    elif shell == 'fish':
+        res_name += "fish/dotedit.fish"
+    else:
+        raise ValueError("Completions not supported for this shell")
+
+    print(resource_stream(__name__, res_name).read().decode())
 
 
 if __name__ == "__main__":
