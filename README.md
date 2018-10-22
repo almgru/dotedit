@@ -78,7 +78,7 @@ $ dotedit --completions zsh > ~/.zfunc/_dotedit
 #### fish
 
 ```fish
-$ dotedit --completions fish ~/.config/fish/completions/dotedit.fish
+$ dotedit --completions fish > ~/.config/fish/completions/dotedit.fish
 ```
 
 Finally, restart your shell session or source the completion script to enable completions.
