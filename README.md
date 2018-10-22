@@ -1,6 +1,13 @@
 # dotedit
 Opens the configuration file (dotfile) for a given program. 
 
+#### Contents
+1. [Usage](#usage)
+2. [Install](#install)
+    * [Bash](#bash)
+    * [Zsh](#zsh)
+    * [fish](#fish)
+
 ## Usage
 
 Open configuration file for conky:
@@ -47,3 +54,31 @@ Update path to xinit: ~/.xinitrc
 ```bash
 $ dotedit --remove xinit
 ```
+
+## Install
+
+```bash
+$ pip install --user dotedit
+```
+
+### Completions
+To enable completions, the completion scripts need to be installed manually. 
+
+#### Bash
+```bash
+$ dotedit --completions bash > ~/.local/share/bash-completion/completions/dotedit
+```
+
+#### Zsh
+
+```zsh
+$ dotedit --completions zsh > ~/.zfunc/_dotedit
+```
+
+#### fish
+
+```fish
+$ dotedit --completions fish ~/.config/fish/completions/dotedit.fish
+```
+
+Finally, restart your shell session or source the completion script to enable completions.
