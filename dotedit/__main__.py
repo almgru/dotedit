@@ -19,8 +19,7 @@ def main():
     store = _PathStore(data_path)
 
     if args.list:
-        for program in store.list():
-            print(program)
+        [print(program) for program in store.list()]
     elif args.remove:
         store.remove(args.remove)
     elif args.update:
@@ -29,8 +28,7 @@ def main():
         except LookupError:
             return 1
 
-        path = read_path("Add path to {0}: ".format(args.update),
-                         existing)
+        path = read_path("Add path to {0}: ".format(args.update), existing)
         store.update(args.update, path)
     elif args.program != "none":
         try:
@@ -68,16 +66,19 @@ def open_editor(path):
     subprocess.call([os.environ.get("EDITOR", "nano"), path])
 
 
-def read_path(prompt, initial_buf):
+def read_path(prompt, initial_text):
     def pre_input_hook():
-        readline.insert_text(initial_buf)
+        readline.insert_text(initial_text)
         readline.redisplay()
 
     readline.set_pre_input_hook(pre_input_hook)
     readline.parse_and_bind("tab: complete")
     readline.parse_and_bind("set match-hidden-files on")
     readline.set_completer(_PathCompleter().complete)
-    path = input(prompt)
+    try:
+        path = input(prompt)
+    except (EOFError, KeyboardInterrupt) as e:
+        sys.exit(1)
     readline.set_pre_input_hook()
     readline.set_completer()
 
