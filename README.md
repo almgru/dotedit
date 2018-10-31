@@ -55,6 +55,21 @@ Update path to xinit: ~/.xinitrc
 $ dotedit --remove xinit
 ```
 
+## Hooks
+You can add pre and post hooks by creating the files
+`$XDG_CONFIG_HOME/dotedit/hooks/pre-edit` and 
+`$XDG_CONFIG_HOME/dotedit/hooks/postedit` and making them executable.
+
+For example to automatically commit and push changes to dotfiles in a git
+directory you can create post edit hook with the following content:
+
+```bash
+#!/bin/sh
+
+cd $HOME/git/dotfiles/
+git add -A . && git commit -m 'update' && git pull --rebase && git push
+```
+
 ## Install
 
 ```bash

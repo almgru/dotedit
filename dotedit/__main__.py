@@ -70,7 +70,24 @@ def init_argparse():
 
 
 def open_editor(path):
+    run_hook("pre-edit")
     call([os.environ.get("EDITOR", "nano"), path])
+    run_hook("post-edit")
+
+
+def run_hook(name):
+    hook = get_config_directory() + "/hooks/" + name
+
+    if os.path.exists(hook) and os.access(hook, os.X_OK):
+        call([hook])
+
+
+def get_config_directory():
+    home = os.environ.get("HOME")
+    config_dir = (os.environ.get("XDG_CONFIG_HOME", home + "/.config") +
+                  "/dotedit")
+
+    return config_dir
 
 
 def read_path(prompt, initial_text):
