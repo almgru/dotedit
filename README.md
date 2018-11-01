@@ -3,6 +3,7 @@ Opens the configuration file (dotfile) for a given program.
 
 #### Contents
 1. [Usage](#usage)
+   * [Hooks](#hooks)
 2. [Install](#install)
     * [Bash](#bash)
     * [Zsh](#zsh)
@@ -55,7 +56,7 @@ Update path to xinit: ~/.xinitrc
 $ dotedit --remove xinit
 ```
 
-## Hooks
+### Hooks
 You can add pre and post hooks by creating the files
 `$XDG_CONFIG_HOME/dotedit/hooks/pre-edit` and 
 `$XDG_CONFIG_HOME/dotedit/hooks/postedit` and making them executable.
@@ -66,7 +67,7 @@ directory you can create post edit hook with the following content:
 ```bash
 #!/bin/sh
 
-cd $HOME/git/dotfiles/
+cd "$HOME/git/dotfiles/" | return
 git add -A . && git commit -m 'update' && git pull --rebase && git push
 ```
 
