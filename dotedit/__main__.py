@@ -42,7 +42,7 @@ def main():
                              _path_matcher.best_match(args.program))
             store.add(args.program, path)
 
-        open_editor(path)
+        open_editor(path, not args.no_hooks)
     else:
         parser.print_usage()
 
@@ -65,14 +65,20 @@ def init_argparse():
     parser.add_argument("--completions", metavar="SHELL",
                         help=("output completion script for SHELL. " +
                               "(bash, zsh & fish currently supported)"))
+    parser.add_argument("-n", "--no-hooks", action="store_true",
+                        help="Do not run pre or post edit hooks")
 
     return parser
 
 
-def open_editor(path):
-    run_hook("pre-edit")
+def open_editor(path, run_hooks):
+    if run_hooks:
+        run_hook("pre-edit")
+
     call([os.environ.get("EDITOR", "nano"), path])
-    run_hook("post-edit")
+
+    if run_hooks:
+        run_hook("post-edit")
 
 
 def run_hook(name):

@@ -8,8 +8,10 @@ then
     _alternative "arguments:custom arg:($args)"
 fi
 
-_arguments '-h[display help]' '--help[display help]' \
+_arguments \
+    '--completions[output completion script for SHELL. (bash, zsh & fish currently supported)]' \
+    '-h[display help]' '--help[display help]' \
     '-l[list programs with known paths]' '--list[list programs with known paths]' \
-    '-u[update PROGRAM path and exit]' '--update[update PROGRAM path and exit]' \
+    '-n[Do not run pre or post edit hooks] --no-hooks[Do not run pre or post edit hooks]' \
     '-r[remove PROGRAM path and exit]' '--remove[remove PROGRAM path and exit]' \
-    '--completions[output completion script for SHELL. (bash, zsh & fish currently supported)]'
+    '-u[update PROGRAM path and exit]' '--update[update PROGRAM path and exit]' \

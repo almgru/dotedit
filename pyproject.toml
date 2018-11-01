@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dotedit"
-version = "1.1.0"
+version = "1.2.0"
 description = "Edit dotfiles easily"
 authors = [
     "Daniel Alm Grundström <daniel.alm.grundstrom@protonmail.com>"
