@@ -67,7 +67,7 @@ directory you can create post edit hook with the following content:
 ```bash
 #!/bin/sh
 
-cd "$HOME/git/dotfiles/" | return
+cd "$HOME/git/dotfiles/" || return
 git add -A . && git commit -m 'update' && git pull --rebase && git push
 ```
 
